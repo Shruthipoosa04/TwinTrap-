@@ -1,0 +1,148 @@
+/* ===== auth.css ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at center, #000 60%, #02121e 100%);
+  color: #fff;
+}
+
+/* ===== Section Layout ===== */
+.auth-section {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-section.active {
+  display: flex;
+}
+
+/* ===== Container ===== */
+.auth-container {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  width: 340px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Logo ===== */
+.auth-logo {
+  font-size: 65px;
+  color: cyan;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px cyan;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px cyan; }
+  to { text-shadow: 0 0 30px cyan, 0 0 60px cyan; }
+}
+
+/* ===== Headings ===== */
+.auth-container h2 {
+  color: cyan;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* ===== Inputs ===== */
+.input-box {
+  position: relative;
+  margin: 15px 0;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 40px 12px 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: rgba(0, 255, 255, 0.08);
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.input-box input:focus {
+  box-shadow: 0 0 10px cyan;
+}
+
+.input-box i {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  color: cyan;
+}
+
+/* ===== Remember + Links ===== */
+.remember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin: 10px 0 20px;
+}
+
+.remember a {
+  color: cyan;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.remember a:hover {
+  text-shadow: 0 0 10px cyan;
+}
+
+/* ===== Button ===== */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, cyan, #007bff);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #00d4ff, cyan);
+  box-shadow: 0 0 15px cyan;
+}
+
+/* ===== Text Links ===== */
+p {
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+p a {
+  color: cyan;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+p a:hover {
+  text-shadow: 0 0 10px cyan;
+}
