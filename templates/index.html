@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TwinTrap - Fake WiFi Detection Tool</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+<!--<div class="floating-auth">
+    <a href="signinup.html" class="auth-btn">Login</a>
+</div>
+-->
+<!-- Toggle Button -->
+<button class="menu-toggle" id="menuToggle">
+  ☰
+</button>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h2 class="logo-text">TwinTrap</h2>
+    <i class="bx bxl-audible icon"></i>
+  </div>
+
+  <ul class="sidebar-menu">
+    <li><a href="#" data-page="home" class="active">Dashboard</a></li>
+    <li><a href="#" data-page="analyze">Analyze</a></li>
+    <li><a href="#" data-page="results">Results</a></li>
+    <li><a href="#" data-page="about">About</a></li>
+  </ul>
+
+ <div class="sidebar-footer">
+    <button>Logout</button>
+  </div>
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main role="main">
+  <!-- Home -->
+  <section id="home" class="page active">
+    <div class="home-container">
+      <h1 class="glow-title">TwinTrap</h1>
+      <p class="subtitle">
+        AI-powered <strong>Fake WiFi Detection System</strong> — identify, analyze, and defend against
+        <span class="highlight">Evil Twin Attacks</span> with precision.
+      </p>
+
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="showPage('analyze')">Start Scan</button>
+        <button class="btn-secondary" onclick="showPage('about')">Learn More</button>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>⚡ Real-Time Scanning</h3>
+          <p>Instantly detect rogue access points and spoofed SSIDs using smart algorithms.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔒 Secure Analysis</h3>
+          <p>All network data is processed locally for maximum user privacy and safety.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📡 AI-Driven Detection</h3>
+          <p>Leverage machine learning to identify anomalies in WiFi signal patterns.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🧠 Intelligent Insights</h3>
+          <p>Gain clear insights into potential threats with easy-to-read visual analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ================================
+     Analyze Section — TwinTrap v2
+================================ -->
+<section id="analyze" class="page analyze-page">
+  <div class="analyze-container">
+    <header class="analyze-header">
+      <h1 class="page-title">Wi-Fi Threat Analyzer</h1>
+      <p class="page-subtitle">
+        Detect nearby networks, analyze their security, and identify potential fake access points.
+      </p>
+    </header>
+
+    <div class="analyze-dashboard">
+      <!-- Left Control Panel -->
+      <div class="analyze-control-panel">
+        <h2>Scan Controls</h2>
+
+        <div class="analyze-control-group">
+          <label for="interfaceSelect">Select Interface</label>
+          <select id="interfaceSelect" class="analyze-interface-select">
+            <option value="wlan0">wlan0</option>
+            <option value="wlan1">wlan1</option>
+          </select>
+        </div>
+
+        <div class="analyze-control-group">
+          <button id="scanBtn" class="analyze-scan-btn" onclick="toggleScan()">Start Scan</button>
+          <div class="analyze-status" id="status">🟢 Idle</div>
+        </div>
+
+        <!-- Live Scan Progress Chart -->
+        <div class="analyze-control-group">
+          <h3>Scan Progress</h3>
+          <canvas id="scanChart" height="120"></canvas>
+        </div>
+      </div>
+
+ 
+</section>
+
+<!-- ================================
+     Results Section — TwinTrap v2
+================================ -->
+<section id="results" class="page">
+  <div class="results-header">
+    <h1><i class="fas fa-wave-square"></i> Scan Results</h1>
+    <p>Review your analyzed access points, verify authenticity, and export full network intelligence reports.</p>
+  </div>
+
+  <div class="results-toolbar">
+    <div class="filter-group">
+      <label for="filterVerdict">Filter:</label>
+      <select id="filterVerdict" onchange="filterResults(this.value)">
+        <option value="all">All Networks</option>
+        <option value="good">Good</option>
+        <option value="suspicious">Suspicious</option>
+        <option value="malicious">Malicious</option>
+      </select>
+    </div>
+    <button class="export-btn" onclick="exportResults()">
+      <i class="fas fa-download"></i> Export JSON
+    </button>
+  </div>
+
+  <div class="results-summary">
+    <div class="summary-card good">
+      <span class="label">Trusted</span>
+      <span id="count-good" class="count">0</span>
+    </div>
+    <div class="summary-card suspicious">
+      <span class="label">Suspicious</span>
+      <span id="count-suspicious" class="count">0</span>
+    </div>
+    <div class="summary-card malicious">
+      <span class="label">Malicious</span>
+      <span id="count-malicious" class="count">0</span>
+    </div>
+  </div>
+
+  <div id="resultsGridFull" class="results-grid">
+    <!-- dynamically populated by JS -->
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> Results are simulation data for demo purposes.
+    Always verify findings with official security tools.
+  </div>
+</section>
+
+
+
+    <!-- About -->
+     <section id="about" class="page">
+  <div class="container">
+    <h1>About Fake WiFi Detection</h1>
+    <p>Version 1.0 — Open-source tool to detect rogue WiFi hotspots. Use responsibly.</p>
+    <div class="disclaimer">
+      <strong>Legal Notice:</strong> Unauthorized network scanning may be illegal.
+    </div>
+
+   <section id="about">
+  <h2 class="qa-title">💡 About: Fake WiFi Detection & Security Awareness</h2>
+
+  <div class="qa-container">
+
+    <div class="qa-card">
+      <div class="question">
+        🔴 What is an Evil Twin Attack?
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        An <strong>Evil Twin Attack</strong> is a cyber attack where a hacker creates a 
+        <strong>fake WiFi network</strong> that appears identical to a legitimate one. 
+        When users connect, the attacker can intercept their data, steal login credentials, and inject malware.
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="question">
+        ⚠ Why Detecting Fake WiFi is Important?
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        Fake WiFi networks allow hackers to perform <strong>Man-in-the-Middle (MitM)</strong> attacks and steal sensitive data.
+        <br><br><strong>Risks include:</strong>
+        <ul>
+          <li>Identity theft and credential theft</li>
+          <li>Financial fraud via stolen banking information</li>
+          <li>Malware injection and device compromise</li>
+          <li>Corporate espionage and data leaks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="question">
+        🛑 What are Common WiFi Vulnerabilities & Attacks?
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        WiFi networks are vulnerable to several types of cyber attacks:
+        <ul>
+          <li><strong>MitM Attack:</strong> Intercepting communication between users and websites.</li>
+          <li><strong>Packet Sniffing:</strong> Capturing unencrypted data on open networks.</li>
+          <li><strong>DoS:</strong> Disrupting connectivity by overwhelming access points.</li>
+          <li><strong>WiFi Phishing:</strong> Fake login portals used to steal credentials.</li>
+          <li><strong>KRACK Attack:</strong> Exploiting WPA2 encryption weaknesses.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="question">
+        🔍 General WiFi Security Questions
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        <ul>
+          <li>What are the main security risks of using public WiFi?</li>
+          <li>How does WPA3 encryption improve WiFi security?</li>
+          <li>What is MAC spoofing, and how do attackers use it?</li>
+          <li>Why should users avoid using open WiFi networks?</li>
+          <li>What are the best practices to secure a home WiFi network?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="question">
+        💻 WiFi Hacking & Cybersecurity Questions
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        <ul>
+          <li>What tools do ethical hackers use to test WiFi security?</li>
+          <li>What is a Deauthentication (Deauth) Attack?</li>
+          <li>How can cybersecurity professionals detect rogue networks?</li>
+          <li>What is the role of a WiFi Pineapple?</li>
+          <li>Can attackers steal data on HTTPS networks?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="question">
+        🔹 WiFi Detection & Prevention Questions
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="answer">
+        <ul>
+          <li>How can AI detect fake WiFi networks?</li>
+          <li>Which tools are best for detecting rogue access points?</li>
+          <li>Can devices automatically warn users about threats?</li>
+          <li>How do enterprises prevent unauthorized WiFi access?</li>
+          <li>What is network fingerprinting and how does it help?</li>
+        </ul>
+      </div>
+    </div>
+
+    <button onclick="showPage('home')" class="btn">⬅ Back</button>
+  </div>
+</section>
+
+ 
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 TwinTrap. For educational use only.</p>
+</footer>
+
+<!-- JS should be loaded at the end of body -->
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
